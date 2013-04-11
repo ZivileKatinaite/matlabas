@@ -1,50 +1,56 @@
 % Monte Carlo (Adaptyvus) metodo realizacija
 %1. Sugeneruojame 100 atsitiktiniu tasku int [a;b]
 %2. Surandame, kuriame fcija igyja didz.(maz) reiksme
-a=-10;
-b=10;
+a1=-10;   %pradine sritis
+b1=10;
 n=2; %dimensija (matavimas)
-%k=100; %tasku (vektoriu) skaicius; 
-% k skaidysim i k1=70,o ir k2=30
-% intervalas a ir b bus sumazintas kazkiek
-x=a + (b-a).* rand(70,n); %generuoja 1000 tasku dvimaciu 
+k1=50; %tasku (vektoriu) skaicius; 
+x1=a1 + (b1-a1).* rand(k1,n); %generuoja k1 tasku dvimaciu 
 %rand(100,1) meta skaicius kurie yra tarp nulio ir vieno, viska
 %100 skaiciu i du stulpelius ismeta
 %sincos(x(1)) paskaiciuos pirmo x reiksme fcijos
-f = [];
-for i=1:70   %kad tiksliau butu reikia imti daugiau reiksmiu
-    f(i)=sincos2(x(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
+f1 = [];
+for i=1:k1   %kad tiksliau butu reikia imti daugiau reiksmiu
+    f1(i)=sincos2(x1(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
 end
-%ieskosim min ir max
-[fMin,indMin]=min(f) %suranda eilute kurioj yra ta min reiksme
-[fMax,indMax]=max(f)
-xMin=x(indMin,:)%kad paimtu visa ta eilute su abiem reiksmem
-xMax=x(indMax,:)
-fprintf('Surastas min = %6.4f, taske x = (%6.4f, %6.4f) \n',fMin,xMin(1),xMin(2))
-fprintf('Surastas min = %6.4f, taske x = (%6.4f, %6.4f) \n',fMax,xMax(1),xMax(2))
-grafikas2
+[fMin1,indMin1]=min(f1); %suranda eilute kurioj yra ta min reiksme
+%[fMax1,indMax1]=max(f1)
+xMin1=x1(indMin1,:); %kad paimtu visa ta eilute su abiem reiksmem
+%xMax1=x1(indMax1,:)
+fprintf('Surastas min1 = %6.4f, taske x1 = (%6.4f, %6.4f) \n',fMin1,xMin1(1),xMin1(2))
+%fprintf('Surastas max1 = %6.4f, taske x1 = (%6.4f, %6.4f) \n',fMax1,xMax1(1),xMax1(2))
 %min ir max reiksmes turi but nedaugiau kaip 2 ir nemaziau kaip -2
-%NUO CIA SKAICIUOJAMA SU KITU MAZESNIU INTERVALU
-a1=-5;
-b1=5;
-n=2; %dimensija (matavimas)
-%k=100; %tasku (vektoriu) skaicius; 
-% k skaidysim i k1=70,o ir k2=30
-% intervalas a ir b bus sumazintas kazkiek
-x=a1 + (b1-a1).* rand(30,n); %generuoja 1000 tasku dvimaciu 
-%rand(100,1) meta skaicius kurie yra tarp nulio ir vieno, viska
-%100 skaiciu i du stulpelius ismeta
-%sincos(x(1)) paskaiciuos pirmo x reiksme fcijos
-f = [];
-for i=1:30   %kad tiksliau butu reikia imti daugiau reiksmiu
-    f(i)=sincos2(x(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
+hold on; %viska i viena brezti
+scatter(x1(:,1),x1(:,2),'b.');
+scatter(xMin1(1),xMin1(2),'g*');
+text(xMin1(1)+0.3,xMin1(2),num2str(fMin));
+rectangle('Position',[-10.0,-10.0,20.0,20.0],...
+    'LineWidth',5,'LineStyle','--')
+
+%kitus 50 bandymu atliekame kitoje 10% sumazintoje srityje
+
+
+a21=xMin1(1)-1;       %sumazinta sritis
+b21=xMin1(1)+1;
+a22=xMin1(2)-1; 
+b22=xMin1(2)+1;
+k2=50; %tasku (vektoriu) skaicius; 
+x2(:,1)=a21 + (b21-a21).* rand(k2,1); %generuoja x tskus; galim parasyt x2_1=
+x2(:,2)=a22 + (b22-a22).* rand(k2,1); %generuoja y tskus; galim x2_2=
+f2 = [];
+for i=1:k2   %kad tiksliau butu reikia imti daugiau reiksmiu
+    f2(i)=sincos2(x2(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
 end
-%ieskosim min ir max
-[fMin,indMin]=min(f) %suranda eilute kurioj yra ta min reiksme
-[fMax,indMax]=max(f)
-xMin=x(indMin,:)%kad paimtu visa ta eilute su abiem reiksmem
-xMax=x(indMax,:)
-fprintf('Surastas min = %6.4f, taske x = (%6.4f, %6.4f) \n',fMin,xMin(1),xMin(2))
-fprintf('Surastas min = %6.4f, taske x = (%6.4f, %6.4f) \n',fMax,xMax(1),xMax(2))
-grafikas2
-%min ir max reiksmes turi but nedaugiau kaip 2 ir nemaziau kaip -2
+[fMin2,indMin2]=min(f2); %suranda eilute kurioj yra ta min reiksme
+%[fMax2,indMax2]=max(f2)
+xMin2=x2(indMin,:);%kad paimtu visa ta eilute su abiem reiksmem
+%xMax2=x2(indMax,:)
+fprintf('Surastas min2 = %6.4f, taske x2 = (%6.4f, %6.4f) \n',fMin2,xMin2(1),xMin2(2))
+%fprintf('Surastas min2 = %6.4f, taske x2 = (%6.4f, %6.4f)\n',fMax2,xMax2(1),xMax2(2)) 
+hold on; %viska i viena brezti
+scatter(x2(:,1),x2(:,2),'b.');
+scatter(xMin2(1),xMin2(2),'r*');
+rectangle('Position',[a21,a22,2.0,2.0],...
+   'LineWidth',2,'LineStyle','--')
+% rectangle pirmi du sk staciakampio apatinis tsk. o kiti inetervalo ilgio virsut tsk
+%grafikas2
