@@ -37,6 +37,16 @@ b22=xMin1(2)+1;
 k2=50; %tasku (vektoriu) skaicius; 
 x2(:,1)=a21 + (b21-a21).* rand(k2,1); %generuoja x tskus; galim parasyt x2_1=
 x2(:,2)=a22 + (b22-a22).* rand(k2,1); %generuoja y tskus; galim x2_2=
+if (b21>10)
+    b21=10;
+    a21=8;
+end
+if (a21<-10)
+    a21=-10;
+    b21=-8;
+end
+
+
 f2 = [];
 for i=1:k2   %kad tiksliau butu reikia imti daugiau reiksmiu
     f2(i)=sincos2(x2(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
@@ -52,5 +62,5 @@ scatter(x2(:,1),x2(:,2),'b.');
 scatter(xMin2(1),xMin2(2),'r*');
 rectangle('Position',[a21,a22,2.0,2.0],...
    'LineWidth',2,'LineStyle','--')
-% rectangle pirmi du sk staciakampio apatinis tsk. o kiti inetervalo ilgio virsut tsk
+% rectangle pirmi du sk staciakampio apatinis tsk. o kiti intervalo ilgio virsut tsk
 %grafikas2
