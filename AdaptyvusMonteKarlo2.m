@@ -23,7 +23,7 @@ fprintf('Surastas min1 = %6.4f, taske x1 = (%6.4f, %6.4f) \n',fMin1,xMin1(1),xMi
 hold on; %viska i viena brezti
 scatter(x1(:,1),x1(:,2),'b.');
 scatter(xMin1(1),xMin1(2),'g*');
-text(xMin1(1)+0.3,xMin1(2),num2str(fMin));
+text(xMin1(1)+0.3,xMin1(2),num2str(fMin1));
 rectangle('Position',[-10.0,-10.0,20.0,20.0],...
     'LineWidth',5,'LineStyle','--')
 
@@ -43,17 +43,23 @@ if (b21>10)
 end
 if (a21<-10)
     a21=-10;
-    b21=-8;
+    b21=-8; %
 end
-
-
+if (b22>10)   %nuo cia 
+     a22=10;
+     b22=8;
+end
+if (a22<-10)
+    a22=-10;
+    b22=-8;
+end    
 f2 = [];
 for i=1:k2   %kad tiksliau butu reikia imti daugiau reiksmiu
     f2(i)=sincos2(x2(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
 end
 [fMin2,indMin2]=min(f2); %suranda eilute kurioj yra ta min reiksme
 %[fMax2,indMax2]=max(f2)
-xMin2=x2(indMin,:);%kad paimtu visa ta eilute su abiem reiksmem
+xMin2=x2(indMin2,:);%kad paimtu visa ta eilute su abiem reiksmem
 %xMax2=x2(indMax,:)
 fprintf('Surastas min2 = %6.4f, taske x2 = (%6.4f, %6.4f) \n',fMin2,xMin2(1),xMin2(2))
 %fprintf('Surastas min2 = %6.4f, taske x2 = (%6.4f, %6.4f)\n',fMax2,xMax2(1),xMax2(2)) 
