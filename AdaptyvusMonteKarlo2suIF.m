@@ -8,7 +8,7 @@ function [fMin2visi,vidurkis] = AdaptyvusMonteKarlo2suIF(funkcija,a1,b1) %ka per
 %  a1=-10; b1=10; funkcija =@sincos2;
 %  [fMin2visi, VID] = AdaptyvusMonteKarlo2suIF(funkcija,a1,b1)
 fMin2visi=[];
-for k=1:10
+for k=1:100
 n=2; %dimensija (matavimas)
 k1=50; %tasku (vektoriu) skaicius; 
 x1=a1 + (b1-a1).* rand(k1,n); %generuoja k1 tasku dvimaciu 
