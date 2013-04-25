@@ -1,4 +1,4 @@
-function [fMin2visi,vidurkis] = AdaptyvusMonteKarlo2(funkcija,a1,b1) %ka perduodam
+function [fMin2visi,fMax2visi,MINvidurkis,MAXvidurkis] = AdaptyvusMonteKarlo2(funkcija,a1,b1) %ka perduodam
 % Monte Carlo (Adaptyvus) metodo realizacija              %FUNKCIJA PERDUODAM
 %1. Sugeneruojame 100 atsitiktiniu tasku int [a;b]
 %2. Surandame, kuriame fcija igyja didz.(maz) reiksme
@@ -6,9 +6,9 @@ function [fMin2visi,vidurkis] = AdaptyvusMonteKarlo2(funkcija,a1,b1) %ka perduod
 %b1=10;
 %PALEIDIMAS: Pvz.
 %  a1=-10; b1=10; funkcija =@branin;
-%  [fMin2visi, VID] = AdaptyvusMonteKarlo2(funkcija,a1,b1)
+%  [fMin2visi,fMax2visi,minVID, maxVID] = AdaptyvusMonteKarlo2(funkcija,a1,b1)
 fMin2visi=[];
-%fMax2visi=[];
+fMax2visi=[];
 for k=1:10
 n=2; %dimensija (matavimas)
 k1=70; %tasku (vektoriu) skaicius; 
@@ -53,12 +53,12 @@ a21=xMin1(1)-1;       %sumazinta sritis minimumui
 b21=xMin1(1)+1;
 a22=xMin1(2)-1; 
 b22=xMin1(2)+1;
-%{
+
 a31=xMax1(1)-1;       %sumazinta sritis maximumui
 b31=xMax1(1)+1;
 a32=xMax1(2)-1; 
 b32=xMax1(2)+1;
-%}
+
 k2=30;               %tasku (vektoriu) skaicius; 
 if (b21>10)  
     b21=10
@@ -76,7 +76,7 @@ if  (b22>10)
     b22=10
     a22=8
 end
-%{
+
 if (b31>10)  
     b31=10
     a31=8
@@ -93,16 +93,16 @@ if  (b32>10)
     b32=10
     a32=8
 end
-%}
+
 x2(:,1)=a21 + (b21-a21).* rand(k2,1); %generuoja x tskus; galim parasyt x2_1=
 x2(:,2)=a22 + (b22-a22).* rand(k2,1); %generuoja y tskus; galim x2_2=
-%x3(:,1)=a31 + (b31-a31).* rand(k2,1); 
-%x3(:,2)=a32 + (b32-a32).* rand(k2,1); 
+x3(:,1)=a31 + (b31-a31).* rand(k2,1); 
+x3(:,2)=a32 + (b32-a32).* rand(k2,1); 
 f2 = [];
 f3 = [];
 for i=1:k2   %kad tiksliau butu reikia imti daugiau reiksmiu
     f2(i)=funkcija(x2(i,:)); %imame eilute visa, perduodam reiksmes x1 x2
-    %f3(i)=funkcija(x3(i,:));
+    f3(i)=funkcija(x3(i,:));
 end
 [fMin2,indMin2]=min(f2); %suranda eilute kurioj yra ta min reiksme
 [fMax2,indMax2]=max(f2);
@@ -120,9 +120,10 @@ rectangle('Position',[a21,a22,2.0,2.0],...
 rectangle('Position',[a31,a32,2.0,2.0],...
    'LineWidth',2,'LineStyle','--')
 fMin2visi=[fMin2visi;fMin2];
-%fMax2visi=[fMax2visi;fMax2];
+fMax2visi=[fMax2visi;fMax2];
 %figure;
 end
 MINvidurkis = mean(fMin2visi);
+MAXvidurkis = mean(fMax2visi);
 % rectangle pirmi du sk staciakampio apatinis tsk. o kiti intervalo ilgio virsut tsk
 %grafikas2

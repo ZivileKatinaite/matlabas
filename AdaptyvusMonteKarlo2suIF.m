@@ -1,3 +1,4 @@
+%SIS SKIRTAS EKSELIUI SUSKAICIUOTI VIURKIUS
 function [fMin2visi,vidurkis] = AdaptyvusMonteKarlo2suIF(funkcija,a1,b1) %ka perduodam
 % Monte Carlo (Adaptyvus) metodo realizacija              %FUNKCIJA PERDUODAM
 %1. Sugeneruojame 100 atsitiktiniu tasku int [a;b]
@@ -8,9 +9,9 @@ function [fMin2visi,vidurkis] = AdaptyvusMonteKarlo2suIF(funkcija,a1,b1) %ka per
 %  a1=-10; b1=10; funkcija =@sincos2;
 %  [fMin2visi, VID] = AdaptyvusMonteKarlo2suIF(funkcija,a1,b1)
 fMin2visi=[];
-for k=1:100
+for k=1:10
 n=2; %dimensija (matavimas)
-k1=50; %tasku (vektoriu) skaicius; 
+k1=90; %tasku (vektoriu) skaicius; 
 x1=a1 + (b1-a1).* rand(k1,n); %generuoja k1 tasku dvimaciu 
 %rand(100,1) meta skaicius kurie yra tarp nulio ir vieno, viska
 %100 skaiciu i du stulpelius ismeta
@@ -53,7 +54,7 @@ a21=xMin1(1)-1;       %sumazinta sritis
 b21=xMin1(1)+1;
 a22=xMin1(2)-1; 
 b22=xMin1(2)+1;
-k2=50;               %tasku (vektoriu) skaicius; 
+k2=10;               %tasku (vektoriu) skaicius; 
 if (b21>10)  
     b21=10
     a21=8
